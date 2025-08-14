@@ -1,25 +1,17 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
+
 const app = express();
+
+// Allow requests from anywhere (for now)
+app.use(cors());
+
+// Example route
+app.get('/', (req, res) => {
+    res.json({ message: "✅ Backend server is working!" });
+});
+
 const PORT = process.env.PORT || 3000;
-
-// Main route
-app.get("/", (req, res) => {
-  res.json({ message: "✅ Backend server is working!" });
-});
-
-// Example route: Users
-app.get("/users", (req, res) => {
-  res.json([
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Smith" }
-  ]);
-});
-
-// Example route: Balance
-app.get("/balance", (req, res) => {
-  res.json({ balance: 1500 });
-});
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
