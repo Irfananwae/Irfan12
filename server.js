@@ -1,17 +1,27 @@
-const express = require('express');
-const cors = require('cors');
+// server.js
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Allow requests from anywhere (for now)
 app.use(cors());
+app.use(express.json());
 
-// Example route
-app.get('/', (req, res) => {
-    res.json({ message: "✅ Backend server is working!" });
+// Default route (root)
+app.get("/", (req, res) => {
+  res.json({ status: "ok", message: "Welcome to API!" });
 });
 
-const PORT = process.env.PORT || 3000;
+// Example data route
+app.get("/data", (req, res) => {
+  res.json({
+    message: "✅ Backend is working!",
+    time: new Date().toISOString()
+  });
+});
+
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
